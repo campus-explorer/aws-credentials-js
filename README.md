@@ -44,8 +44,12 @@ Returns an AWS.Credentials object.
 
 ### useProfile()
 
-Loads the profile's credential into the enviornment and the global credentials settings for the AWS SDK.
+Loads the profile's credential into the enviornment and the global credentials settings for the AWS SDK. You need to pass your copy of the AWS object.
 
     useProfile({
-        /* ... same options as getProfileCredentials() */
+        profile,
+        AWS,
+        {
+            /* ... same options as getProfileCredentials() */
+        }
     })

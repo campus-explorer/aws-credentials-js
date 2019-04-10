@@ -1,7 +1,6 @@
 process.env.AWS_SDK_LOAD_CONFIG = 1;
 
 const assert = require('assert');
-const AWS = require('aws-sdk');
 const getTtl = require('./get-ttl');
 const defaultGetMfaToken = require('./get-mfa-token');
 const withCache = require('./cache');
@@ -9,14 +8,13 @@ const getCredentials = require('./get-credentials');
 
 const defaultCacheDir = `${process.env.HOME}/.aws/cli/cache`;
 
-const getProfileCredentials = (
-    profile,
-    {
+const getProfileCredentials = (profile, options = {}) => {
+    const {
         cacheDir = defaultCacheDir,
         duration: specifiedDuration,
         getMfaToken = defaultGetMfaToken,
-    } = {},
-) => {
+    } = options;
+
     assert(profile, 'getProfileCredentials(): no profile provided');
     const duration = specifiedDuration ? specifiedDuration : getTtl(profile);
     return withCache(getCredentials)({
@@ -27,8 +25,8 @@ const getProfileCredentials = (
     });
 };
 
-const useProfile = async args => {
-    const credentials = await getProfileCredentials(args);
+const useProfile = async (profile, AWS, options) => {
+    const credentials = await getProfileCredentials(profile, options);
     const { accessKeyId, secretAccessKey, sessionToken } = credentials;
     AWS.config.credentials.accessKeyId = accessKeyId;
     AWS.config.credentials.secretAccessKey = secretAccessKey;
