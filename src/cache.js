@@ -25,7 +25,13 @@ const getFilename = ({ profile, cacheDir }) => {
 
 const getCredentialsFromFile = filename => {
     if (!fs.existsSync(filename)) return undefined;
-    const cached = JSON.parse(fs.readFileSync(filename, 'utf8'));
+
+    let cached;
+    try {
+        cached = JSON.parse(fs.readFileSync(filename, 'utf8'));
+    } catch {}
+
+    if (!cached) return undefined;
     const {
         AccessKeyId: accessKeyId,
         SecretAccessKey: secretAccessKey,
