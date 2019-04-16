@@ -10,7 +10,6 @@ const memoize = require('memoizee');
 
 const getProfileConfigs = memoize(() => {
     const { iniLoader } = AWS.util;
-    const profiles = {};
     let profilesFromConfig = {};
 
     if (process.env[AWS.util.configOptInEnv]) {
@@ -25,23 +24,8 @@ const getProfileConfigs = memoize(() => {
             process.env[AWS.util.configOptInEnv] &&
             process.env[AWS.util.sharedCredentialsFileEnv],
     });
-    for (
-        let i = 0, profileNames = Object.keys(profilesFromConfig);
-        i < profiles.length;
-        i++
-    ) {
-        profiles[profileNames[i]] = profilesFromConfig[profileNames[i]];
-    }
 
-    for (
-        let i = 0, profileNames = Object.keys(profilesFromCreds);
-        i < profileNames.length;
-        i++
-    ) {
-        profiles[profileNames[i]] = profilesFromCreds[profileNames[i]];
-    }
-
-    return profiles;
+    return { ...profilesFromConfig, ...profilesFromCreds };
 });
 
 const assertProfileExists = (profileConfigs, profile) => {
