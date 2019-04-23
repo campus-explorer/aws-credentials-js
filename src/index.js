@@ -28,9 +28,12 @@ const getProfileCredentials = (profile, options = {}) => {
 const useProfile = async (profile, AWS, options) => {
     const credentials = await getProfileCredentials(profile, options);
     const { accessKeyId, secretAccessKey, sessionToken } = credentials;
-    AWS.config.credentials.accessKeyId = accessKeyId;
-    AWS.config.credentials.secretAccessKey = secretAccessKey;
-    AWS.config.credentials.sessionToken = sessionToken;
+    AWS.config.credentials = {
+        ...(AWS.config.credentials || {}),
+        accessKeyId,
+        secretAccessKey,
+        sessionToken,
+    };
     process.env.AWS_ACCESS_KEY_ID = accessKeyId;
     process.env.AWS_SECRET_ACCESS_KEY = secretAccessKey;
     process.env.AWS_SESSION_TOKEN = sessionToken;
