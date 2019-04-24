@@ -1,7 +1,9 @@
 const inquirer = require('inquirer');
 
+const prompt = inquirer.createPromptModule({ output: process.stderr });
+
 const getMfaToken = async serial =>
-    inquirer.prompt({
+    prompt({
         name: 'token',
         type: 'input',
         default: '',
