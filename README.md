@@ -8,13 +8,24 @@ JavaScript helper code to manage AWS credentials
 
 ## Usage
 
-    import { getProfileCredentials, useProfile } from '@campus-explorer/aws-credentials';
+    import {
+        getProfileCredentials,
+        useProfile,
+        getProfileConfig,
+    } from '@campus-explorer/aws-credentials';
 
     # Get an AWS.Credentials object for the profile
     const credentials = await getProfileCredentials('my-profile');
 
     # Alternatively, set AWS to use the profile
     await useProfile('my-profile');
+
+    # See if a profile exists
+    try {
+        getProfileConfig('my-profile');
+    } catch (error) {
+        // doesn't exist
+    }
 
 ## Description
 

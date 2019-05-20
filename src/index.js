@@ -5,6 +5,7 @@ const getTtl = require('./get-ttl');
 const defaultGetMfaToken = require('./get-mfa-token');
 const withCache = require('./cache');
 const getCredentials = require('./get-credentials');
+const getProfileConfig = require('./profile-config');
 
 const defaultCacheDir = `${process.env.HOME}/.aws/cli/cache`;
 
@@ -41,5 +42,6 @@ const useProfile = async (profile, AWS, options) => {
 
 module.exports = {
     getProfileCredentials,
+    getProfileConfig,
     useProfile,
 };
