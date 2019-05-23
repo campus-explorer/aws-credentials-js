@@ -1,8 +1,6 @@
 process.env.AWS_SDK_LOAD_CONFIG = 1;
 
 const assert = require('assert');
-// eslint-disable-next-line no-unused-vars
-const AWS = require('aws-sdk');
 const getTtl = require('./get-ttl');
 const defaultGetMfaToken = require('./get-mfa-token');
 const withCache = require('./cache');
