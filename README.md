@@ -8,6 +8,7 @@ JavaScript helper code to manage AWS credentials
 
 ## Usage
 
+    import AWS from 'aws-sdk';
     import {
         getProfileCredentials,
         useProfile,
@@ -18,7 +19,7 @@ JavaScript helper code to manage AWS credentials
     const credentials = await getProfileCredentials('my-profile');
 
     # Alternatively, set AWS to use the profile
-    await useProfile('my-profile');
+    await useProfile('my-profile', AWS);
 
     # See if a profile exists
     try {
