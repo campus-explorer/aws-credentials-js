@@ -1,6 +1,4 @@
 {
-    "linters": {
-        "*.js": ["xo --fix", "git add"],
-        "package.json": ["fixpack", "git add"]
-    }
+    "*.js": ["xo --fix", "git add"],
+    "package.json": ["fixpack", "git add"]
 }
