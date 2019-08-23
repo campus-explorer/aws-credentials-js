@@ -6,7 +6,7 @@
   "bugs": "https://github.com/campus-explorer/aws-credentials-js/issues",
   "dependencies": {
     "aws-sdk": "^2.437.0",
-    "inquirer": "^6.2.2",
+    "inquirer": "^7.0.0",
     "lodash": "^4.17.11",
     "memoizee": "^0.4.14",
     "mkdirp": "^0.5.1"
