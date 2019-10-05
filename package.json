@@ -17,7 +17,7 @@
     "lint-staged": "^9.0.2",
     "loud-rejection": "^2.1.0",
     "prettier": "^1.16.4",
-    "xo": "^0.24.0"
+    "xo": "^0.25.3"
   },
   "engines": {
     "node": ">=8.0.0"

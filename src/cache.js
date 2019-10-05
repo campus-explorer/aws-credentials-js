@@ -29,7 +29,7 @@ const getCredentialsFromFile = filename => {
     let cached;
     try {
         cached = JSON.parse(fs.readFileSync(filename, 'utf8'));
-    } catch (error) {
+    } catch {
         cached = undefined;
     }
 
