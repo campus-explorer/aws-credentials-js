@@ -5,7 +5,7 @@
   "author": "Stephen Caldwell <steve@campusexplorer.com>",
   "bugs": "https://github.com/campus-explorer/aws-credentials-js/issues",
   "dependencies": {
-    "aws-sdk": "^2.601.0",
+    "aws-sdk": "^2.602.0",
     "inquirer": "^7.0.3",
     "lodash": "^4.17.15",
     "memoizee": "^0.4.14",
@@ -14,7 +14,7 @@
   "devDependencies": {
     "eslint-plugin-prettier": "^3.1.2",
     "fixpack": "^2.3.1",
-    "husky": "^4.0.6",
+    "husky": "^4.0.9",
     "lint-staged": "^9.5.0",
     "loud-rejection": "^2.2.0",
     "prettier": "^1.19.1",
