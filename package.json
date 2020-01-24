@@ -9,7 +9,7 @@
     "inquirer": "^7.0.3",
     "lodash": "^4.17.15",
     "memoizee": "^0.4.14",
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^1.0.0"
   },
   "devDependencies": {
     "eslint-plugin-prettier": "^3.1.2",
