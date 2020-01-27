@@ -1,7 +1,7 @@
 {
   "name": "@campus-explorer/aws-credentials",
   "description": "JavaScript helper code to manage AWS credentials",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "author": "Stephen Caldwell <steve@campusexplorer.com>",
   "bugs": "https://github.com/campus-explorer/aws-credentials-js/issues",
   "dependencies": {
