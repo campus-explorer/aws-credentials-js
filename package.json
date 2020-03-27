@@ -5,7 +5,7 @@
   "author": "Stephen Caldwell <steve@campusexplorer.com>",
   "bugs": "https://github.com/campus-explorer/aws-credentials-js/issues",
   "dependencies": {
-    "aws-sdk": "^2.602.0",
+    "aws-sdk": "^2.648.0",
     "inquirer": "^7.0.3",
     "lodash": "^4.17.15",
     "memoizee": "^0.4.14",
