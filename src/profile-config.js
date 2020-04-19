@@ -8,36 +8,43 @@ node_modules/aws-sdk/lib/credentials/shared_ini_file_credentials.js.
 const AWS = require('aws-sdk');
 const memoize = require('memoizee');
 
+/**
+ * @typedef {Record<string, Record<string,string>>} IniFileContent
+ */
+
+const configOptInEnv = 'AWS_SDK_LOAD_CONFIG';
+const sharedConfigFileEnv = 'AWS_CONFIG_FILE';
+
+/** @type {() => IniFileContent} */
 const getProfileConfigs = memoize(() => {
-    const { iniLoader } = AWS.util;
+    const iniLoader = new AWS.IniLoader();
     let profilesFromConfig = {};
 
-    if (process.env[AWS.util.configOptInEnv]) {
+    if (process.env[configOptInEnv]) {
         profilesFromConfig = iniLoader.loadFrom({
             isConfig: true,
-            filename: process.env[AWS.util.sharedConfigFileEnv],
+            filename: process.env[sharedConfigFileEnv],
         });
     }
 
     const profilesFromCreds = iniLoader.loadFrom({
         filename:
-            process.env[AWS.util.configOptInEnv] &&
-            process.env[AWS.util.sharedCredentialsFileEnv],
+            process.env[configOptInEnv] && process.env[sharedConfigFileEnv],
     });
 
     return { ...profilesFromConfig, ...profilesFromCreds };
 });
 
+/** @type {(profileConfigs: IniFileContent, profile: string) => void} */
 const assertProfileExists = (profileConfigs, profile) => {
     const profileConfig = profileConfigs[profile] || {};
 
     if (Object.keys(profileConfig).length === 0) {
-        throw AWS.util.error(new Error(`Profile ${profile} not found`), {
-            code: 'SharedIniFileCredentialsProviderFailure',
-        });
+        throw new Error(`Profile ${profile} not found`);
     }
 };
 
+/** @type {(profile:string) => Record<string,string>} */
 const getProfileConfig = memoize(profile => {
     const profileConfigs = getProfileConfigs();
     assertProfileExists(profileConfigs, profile);

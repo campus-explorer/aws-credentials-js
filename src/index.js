@@ -1,31 +1,46 @@
-process.env.AWS_SDK_LOAD_CONFIG = 1;
+process.env.AWS_SDK_LOAD_CONFIG = '1';
 
 const assert = require('assert');
 const getTtl = require('./get-ttl');
 const defaultGetMfaToken = require('./get-mfa-token');
-const withCache = require('./cache');
+const getCredentialsUseCache = require('./cache');
 const getCredentials = require('./get-credentials');
 const getProfileConfig = require('./profile-config');
 
 const defaultCacheDir = `${process.env.HOME}/.aws/cli/cache`;
 
-const getProfileCredentials = (profile, options = {}) => {
+/**
+ * @param {string} profile
+ * @param {{
+ *     cacheDir: string,
+ *     duration: number,
+ *     getMfaToken: (mfaSerial: string) => Promise<{ token: string }>,
+ * } | void} [options]
+ */
+const getProfileCredentials = (profile, options) => {
     const {
         cacheDir = defaultCacheDir,
         duration: specifiedDuration,
         getMfaToken = defaultGetMfaToken,
-    } = options;
+    } = options || {};
 
     assert(profile, 'getProfileCredentials(): no profile provided');
     const duration = specifiedDuration ? specifiedDuration : getTtl(profile);
-    return withCache(getCredentials)({
-        profile,
-        cacheDir,
-        duration,
-        getMfaToken,
-    });
+    return getCredentialsUseCache(cacheDir, profile, () =>
+        getCredentials({ profile, duration, getMfaToken }),
+    );
 };
 
+/**
+ * @param {string} profile
+ * @param {AWS} AWS
+ * @param {{
+ *     cacheDir: string,
+ *     duration: number,
+ *     getMfaToken: (mfaSerial: string) => Promise<{ token: string }>,
+ * } | void} [options]
+ * @returns {Promise<void>}
+ */
 const useProfile = async (profile, AWS, options) => {
     const credentials = await getProfileCredentials(profile, options);
     const { accessKeyId, secretAccessKey, sessionToken } = credentials;

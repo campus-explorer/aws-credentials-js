@@ -1,6 +1,12 @@
-const AWS = require('aws-sdk');
 const getProfileConfig = require('./profile-config');
 
+/**
+ * @type {(profile: string) => {
+ *     accessKeyId: string,
+ *     secretAccessKey: string,
+ *     sessionToken?: string,
+ * }}
+ */
 const getStaticCredentials = profile => {
     const {
         aws_access_key_id: accessKeyId,
@@ -9,10 +15,7 @@ const getStaticCredentials = profile => {
     } = getProfileConfig(profile);
 
     if (!accessKeyId || !secretAccessKey) {
-        throw AWS.util.error(
-            new Error(`Credentials not set for profile ${profile}`),
-            { code: 'SharedIniFileCredentialsProviderFailure' },
-        );
+        throw new Error(`Credentials not set for profile ${profile}`);
     }
 
     return {

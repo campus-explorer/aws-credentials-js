@@ -5,8 +5,19 @@ node_modules/aws-sdk/lib/credentials/shared_ini_file_credentials.js.
 
 */
 const AWS = require('aws-sdk');
+const { merge } = require('lodash');
 const getProfileConfig = require('./profile-config');
 
+/**
+ * @typedef {{
+ *     accessKeyId: string,
+ *     secretAccessKey: string,
+ *     sessionToken: string,
+ *     expireTime: Date,
+ * }} RoleCredentials
+ */
+
+/** @type {(params: {profile: string, duration?: number, getMfaToken: (mfaSerial: string) => Promise<{ token: string }>}) => Promise<RoleCredentials>} */
 const getRoleCredentials = async ({
     profile: roleProfile,
     duration,
@@ -19,26 +30,25 @@ const getRoleCredentials = async ({
     } = getProfileConfig(roleProfile);
 
     if (!sourceProfileName) {
-        throw AWS.util.error(
-            new Error(`source_profile is not set using profile ${roleProfile}`),
-            { code: 'SharedIniFileCredentialsProviderFailure' },
+        throw new Error(
+            `source_profile is not set using profile ${roleProfile}`,
         );
     }
 
     if (typeof getProfileConfig(sourceProfileName) !== 'object') {
-        throw AWS.util.error(
-            new Error(
-                `source_profile ${sourceProfileName} using profile ${roleProfile} does not exist`,
-            ),
-            { code: 'SharedIniFileCredentialsProviderFailure' },
+        throw new TypeError(
+            `source_profile ${sourceProfileName} using profile ${roleProfile} does not exist`,
         );
     }
 
     const sourceCredentials = new AWS.SharedIniFileCredentials(
-        AWS.util.merge(this.options || {}, {
-            profile: sourceProfileName,
-            preferStaticCredentials: true,
-        }),
+        merge(
+            {},
+            {
+                profile: sourceProfileName,
+                preferStaticCredentials: true,
+            },
+        ),
     );
 
     const sts = new AWS.STS({
@@ -59,6 +69,8 @@ const getRoleCredentials = async ({
     };
 
     const response = await sts.assumeRole(roleParams).promise();
+    if (!response.Credentials) throw new Error('Failed to assume role');
+
     const {
         AccessKeyId: accessKeyId,
         SecretAccessKey: secretAccessKey,

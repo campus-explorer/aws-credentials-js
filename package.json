@@ -12,12 +12,17 @@
     "mkdirp": "^0.5.1"
   },
   "devDependencies": {
+    "@types/inquirer": "^6.5.0",
+    "@types/lodash": "^4.14.150",
+    "@types/memoizee": "^0.4.3",
+    "@types/mkdirp": "^1.0.0",
     "eslint-plugin-prettier": "^3.1.2",
     "fixpack": "^2.3.1",
     "husky": "^4.0.9",
     "lint-staged": "^10.0.3",
     "loud-rejection": "^2.2.0",
     "prettier": "^1.19.1",
+    "typescript": "^3.8.3",
     "xo": "^0.25.3"
   },
   "engines": {
@@ -38,8 +43,11 @@
   "scripts": {
     "lint": "xo",
     "posttest": "yarn lint",
-    "test": "true"
+    "test": "true",
+    "ts:check": "tsc",
+    "ts:watch": "tsc --watch"
   },
+  "types": "src/index.d.ts",
   "xo": {
     "prettier": true,
     "rules": {

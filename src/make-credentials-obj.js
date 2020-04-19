@@ -1,5 +1,14 @@
 const AWS = require('aws-sdk');
 
+/**
+ *
+ * @param {object} params
+ * @param {string} params.accessKeyId
+ * @param {string} params.secretAccessKey
+ * @param {string | undefined} [params.sessionToken]
+ * @param {number | undefined} [params.expireTime]
+ * @returns {AWS.Credentials}
+ */
 const makeCredentialsObj = ({
     accessKeyId,
     secretAccessKey,

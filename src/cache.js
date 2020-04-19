@@ -4,6 +4,7 @@ const mkdirp = require('mkdirp');
 const getProfileConfig = require('./profile-config');
 const makeCredentialsObj = require('./make-credentials-obj');
 
+/** @type {(cacheDir: string) => void} */
 const mkdirIfNotExists = cacheDir => {
     if (!fs.existsSync(cacheDir)) {
         mkdirp.sync(cacheDir);
@@ -11,7 +12,8 @@ const mkdirIfNotExists = cacheDir => {
     }
 };
 
-const getFilename = ({ profile, cacheDir }) => {
+/** @type {(profile: string, cacheDir: string) => string} */
+const getFilename = (profile, cacheDir) => {
     const profileConfig = getProfileConfig(profile);
     const { role_arn: roleArn, mfa_serial: mfaSerial } = profileConfig;
     const unhashed =
@@ -23,6 +25,7 @@ const getFilename = ({ profile, cacheDir }) => {
     return `${cacheDir}/${hash.digest('hex')}.json`;
 };
 
+/** @type {(filename: string) => AWS.Credentials | void} */
 const getCredentialsFromFile = filename => {
     if (!fs.existsSync(filename)) return undefined;
 
@@ -49,6 +52,7 @@ const getCredentialsFromFile = filename => {
     return credentials.expired ? undefined : credentials;
 };
 
+/** @type {(params: {cacheDir: string, filename: string, credentials: AWS.Credentials}) => void} */
 const writeCredentialsToFile = ({ cacheDir, filename, credentials }) => {
     const { sessionToken, expireTime } = credentials;
     mkdirIfNotExists(cacheDir);
@@ -65,13 +69,13 @@ const writeCredentialsToFile = ({ cacheDir, filename, credentials }) => {
     );
 };
 
-const withCache = fn => async ({ cacheDir, ...args }) => {
-    const { profile } = args;
-    const filename = getFilename({ profile, cacheDir });
+/** @type {(cacheDir: string, profile: string, getCredentials: () => Promise<AWS.Credentials>) => Promise<AWS.Credentials>} */
+const getCredentialsUseCache = async (cacheDir, profile, getCredentials) => {
+    const filename = getFilename(profile, cacheDir);
     const cached = getCredentialsFromFile(filename);
-    const credentials = cached ? cached : await fn(args);
+    const credentials = cached ? cached : await getCredentials();
     writeCredentialsToFile({ cacheDir, filename, credentials });
     return credentials;
 };
 
-module.exports = withCache;
+module.exports = getCredentialsUseCache;
