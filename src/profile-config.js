@@ -14,6 +14,7 @@ const memoize = require('memoizee');
 
 const configOptInEnv = 'AWS_SDK_LOAD_CONFIG';
 const sharedConfigFileEnv = 'AWS_CONFIG_FILE';
+const sharedCredentialsFileEnv = 'AWS_SHARED_CREDENTIALS_FILE';
 
 /** @type {() => IniFileContent} */
 const getProfileConfigs = memoize(() => {
@@ -29,7 +30,8 @@ const getProfileConfigs = memoize(() => {
 
     const profilesFromCreds = iniLoader.loadFrom({
         filename:
-            process.env[configOptInEnv] && process.env[sharedConfigFileEnv],
+            process.env[configOptInEnv] &&
+            process.env[sharedCredentialsFileEnv],
     });
 
     return { ...profilesFromConfig, ...profilesFromCreds };
