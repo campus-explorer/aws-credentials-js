@@ -11,7 +11,7 @@ export function getProfileConfig(profile: string): Record<string, string>;
 
 export function useProfile(
     profile: string,
-    AWS: AWS,
+    AWS: object,
     options?: {
         cacheDir: string,
         duration: number,
