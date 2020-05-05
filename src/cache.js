@@ -5,7 +5,7 @@ const getProfileConfig = require('./profile-config');
 const makeCredentialsObj = require('./make-credentials-obj');
 
 /** @type {(cacheDir: string) => void} */
-const mkdirIfNotExists = cacheDir => {
+const mkdirIfNotExists = (cacheDir) => {
     if (!fs.existsSync(cacheDir)) {
         mkdirp.sync(cacheDir);
         fs.chmodSync(cacheDir, 0o700);
@@ -26,7 +26,7 @@ const getFilename = (profile, cacheDir) => {
 };
 
 /** @type {(filename: string) => AWS.Credentials | void} */
-const getCredentialsFromFile = filename => {
+const getCredentialsFromFile = (filename) => {
     if (!fs.existsSync(filename)) return undefined;
 
     let cached;

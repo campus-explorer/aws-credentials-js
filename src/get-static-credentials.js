@@ -7,7 +7,7 @@ const getProfileConfig = require('./profile-config');
  *     sessionToken?: string,
  * }}
  */
-const getStaticCredentials = profile => {
+const getStaticCredentials = (profile) => {
     const {
         aws_access_key_id: accessKeyId,
         aws_secret_access_key: secretAccessKey,

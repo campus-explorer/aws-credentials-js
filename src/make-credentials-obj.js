@@ -9,7 +9,7 @@ const AWS = require('aws-sdk');
  * @param {number | undefined} [params.expireTime]
  * @returns {AWS.Credentials}
  */
-const makeCredentialsObj = ({
+const makeCredentialsObject = ({
     accessKeyId,
     secretAccessKey,
     sessionToken,
@@ -31,4 +31,4 @@ const makeCredentialsObj = ({
     return credentials;
 };
 
-module.exports = makeCredentialsObj;
+module.exports = makeCredentialsObject;

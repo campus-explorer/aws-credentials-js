@@ -61,14 +61,14 @@ const getRoleCredentials = async ({
         mfaToken = response.token;
     }
 
-    const roleParams = {
+    const roleParameters = {
         RoleArn: roleArn,
         RoleSessionName: 'archer-serverless-' + Date.now(),
         DurationSeconds: duration,
         ...(mfaSerial && { SerialNumber: mfaSerial, TokenCode: mfaToken }),
     };
 
-    const response = await sts.assumeRole(roleParams).promise();
+    const response = await sts.assumeRole(roleParameters).promise();
     if (!response.Credentials) throw new Error('Failed to assume role');
 
     const {

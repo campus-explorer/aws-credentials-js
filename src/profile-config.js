@@ -47,7 +47,7 @@ const assertProfileExists = (profileConfigs, profile) => {
 };
 
 /** @type {(profile:string) => Record<string,string>} */
-const getProfileConfig = memoize(profile => {
+const getProfileConfig = memoize((profile) => {
     const profileConfigs = getProfileConfigs();
     assertProfileExists(profileConfigs, profile);
     return profileConfigs[profile];
