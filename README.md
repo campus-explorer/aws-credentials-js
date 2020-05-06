@@ -1,6 +1,6 @@
 # aws-credentials-js
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/campus-explorer/aws-credentials-js.svg)](https://greenkeeper.io/)
+
 
 JavaScript helper code to manage AWS credentials
 
