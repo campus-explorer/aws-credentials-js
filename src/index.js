@@ -33,7 +33,7 @@ const getProfileCredentials = (profile, options) => {
 
 /**
  * @param {string} profile
- * @param {AWS} AWS
+ * @param {import('aws-sdk')} AWS
  * @param {{
  *     cacheDir: string,
  *     duration: number,
