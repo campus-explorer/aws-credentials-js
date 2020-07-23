@@ -5,7 +5,6 @@
   "author": "Stephen Caldwell <steve@campusexplorer.com>",
   "bugs": "https://github.com/campus-explorer/aws-credentials-js/issues",
   "dependencies": {
-    "aws-sdk": "^2.670.0",
     "inquirer": "^7.1.0",
     "lodash": "^4.17.15",
     "memoizee": "^0.4.14",
@@ -39,6 +38,9 @@
   },
   "license": "MIT",
   "main": "src/index.js",
+  "peerDependencies": {
+    "aws-sdk": "2.x"
+  },
   "repository": "campus-explorer/aws-credentials-js",
   "scripts": {
     "lint": "xo",
