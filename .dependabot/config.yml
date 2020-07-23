@@ -10,6 +10,6 @@ update_configs:
       - match:
           dependency_type: 'production'
           update_type: 'security:patch'
+    ignored_updates:
       - match:
           dependency_name: 'aws-sdk'
-          update_type: 'semver:minor'
