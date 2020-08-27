@@ -5,23 +5,23 @@
   "author": "Stephen Caldwell <steve@campusexplorer.com>",
   "bugs": "https://github.com/campus-explorer/aws-credentials-js/issues",
   "dependencies": {
-    "inquirer": "^7.1.0",
-    "lodash": "^4.17.15",
+    "inquirer": "^7.3.3",
+    "lodash": "^4.17.20",
     "memoizee": "^0.4.14",
     "mkdirp": "^1.0.4"
   },
   "devDependencies": {
-    "@types/inquirer": "^7.3.0",
-    "@types/lodash": "^4.14.150",
+    "@types/inquirer": "^7.3.1",
+    "@types/lodash": "^4.14.160",
     "@types/memoizee": "^0.4.4",
-    "@types/mkdirp": "^1.0.0",
-    "eslint-plugin-prettier": "^3.1.3",
+    "@types/mkdirp": "^1.0.1",
+    "eslint-plugin-prettier": "^3.1.4",
     "fixpack": "^3.0.6",
     "husky": "^4.2.5",
-    "lint-staged": "^10.2.2",
+    "lint-staged": "^10.2.13",
     "loud-rejection": "^2.2.0",
-    "prettier": "^2.0.5",
-    "typescript": "^3.8.3",
+    "prettier": "^2.1.1",
+    "typescript": "^4.0.2",
     "xo": "^0.33.0"
   },
   "engines": {
