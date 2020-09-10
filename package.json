@@ -12,17 +12,17 @@
   },
   "devDependencies": {
     "@types/inquirer": "^7.3.1",
-    "@types/lodash": "^4.14.160",
+    "@types/lodash": "^4.14.161",
     "@types/memoizee": "^0.4.4",
     "@types/mkdirp": "^1.0.1",
     "eslint-plugin-prettier": "^3.1.4",
     "fixpack": "^3.0.6",
-    "husky": "^4.2.5",
-    "lint-staged": "^10.2.13",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.3.0",
     "loud-rejection": "^2.2.0",
     "prettier": "^2.1.1",
     "typescript": "^4.0.2",
-    "xo": "^0.33.0"
+    "xo": "^0.33.1"
   },
   "engines": {
     "node": ">=10.0.0"
