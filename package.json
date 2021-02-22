@@ -17,7 +17,7 @@
     "@types/mkdirp": "^1.0.1",
     "eslint-plugin-prettier": "^3.1.4",
     "fixpack": "^3.0.6",
-    "husky": "^4.3.0",
+    "husky": "^5.1.0",
     "lint-staged": "^10.3.0",
     "loud-rejection": "^2.2.0",
     "prettier": "^2.1.1",
