@@ -22,7 +22,7 @@
     "loud-rejection": "^2.2.0",
     "prettier": "^2.1.1",
     "typescript": "^4.0.2",
-    "xo": "^0.33.1"
+    "xo": "^0.38.2"
   },
   "engines": {
     "node": ">=10.0.0"
