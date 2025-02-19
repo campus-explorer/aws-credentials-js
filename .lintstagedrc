@@ -1,4 +1,0 @@
-{
-    "*.js": ["xo --fix"],
-    "package.json": ["fixpack"]
-}
